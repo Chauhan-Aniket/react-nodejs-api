@@ -5,7 +5,7 @@ function App() {
 	const URL = "http://localhost:3000/books";
 
 	useEffect(() => {
-		fetch(URL)
+		fetch(URL || "https://goodbooks.onrender.com/books")
 			.then((res) => res.json())
 			.then((data) => {
 				setData(data);
