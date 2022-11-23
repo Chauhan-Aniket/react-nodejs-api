@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 
 function App() {
 	const [data, setData] = useState();
-	const URL = "http://localhost:3000/books";
+	const URL =
+		"https://goodbooks.onrender.com/books" || "http://localhost:3000/books";
 
 	useEffect(() => {
-		fetch(URL || "https://goodbooks.onrender.com/books")
+		fetch(URL)
 			.then((res) => res.json())
 			.then((data) => {
 				setData(data);
