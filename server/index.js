@@ -23,18 +23,24 @@ const csvRead = fs
 	});
 
 // Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use((req, res, next) => {
+	express.static(path.resolve(__dirname, "../client/build"));
+	res.append("Access-Control-Allow-Origin", ["*"]);
+	res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+	res.append("Access-Control-Allow-Headers", "Content-Type");
+	next();
+});
 
 csvRead.on("end", () => {
 	// Handle GET requests to /books route
 	app.get("/books", (req, res) => {
 		res.json(csvData);
 	});
-});
 
-// All other GET requests not handled before will return our React app
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+	// All other GET requests not handled before will return our React app
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+	});
 });
 
 app.listen(PORT, () => {
