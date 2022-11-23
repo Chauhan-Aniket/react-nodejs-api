@@ -38,7 +38,7 @@ csvRead.on("end", () => {
 	});
 
 	// add middlewares
-	app.use(express.static(path.join(__dirname, "..", "build")));
+	app.use(express.static(path.join(__dirname, "../client/build")));
 
 	// All other GET requests not handled before will return our React app
 	app.get("*", (req, res) => {
