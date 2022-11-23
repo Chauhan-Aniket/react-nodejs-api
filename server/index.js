@@ -35,14 +35,14 @@ csvRead.on("end", () => {
 	app.get("/books", (req, res) => {
 		res.json(csvData);
 	});
-});
 
-// add middlewares
-app.use(express.static(path.join(__dirname, "../client/build")));
+	// add middlewares
+	app.use(express.static(path.resolve(__dirname, "../client/build")));
 
-// All other GET requests not handled before will return our React app
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "../client/build", "/index.html"));
+	// All other GET requests not handled before will return our React app
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "../client/build", "/index.html"));
+	});
 });
 
 app.listen(PORT, () => {
