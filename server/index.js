@@ -24,7 +24,6 @@ const csvRead = fs
 
 // Have Node serve the files for our built React app
 app.use((req, res, next) => {
-	express.static(path.resolve(__dirname, "../client/build"));
 	res.append("Access-Control-Allow-Origin", ["*"]);
 	res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 	res.append("Access-Control-Allow-Headers", "Content-Type");
@@ -42,7 +41,7 @@ csvRead.on("end", () => {
 
 	// All other GET requests not handled before will return our React app
 	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+		res.sendFile(path.resolve(__dirname, "../client/build", "/index.html"));
 	});
 });
 
