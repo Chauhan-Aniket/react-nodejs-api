@@ -12,7 +12,7 @@ function App() {
 				setData(data);
 			})
 			.catch((err) => console.error(err));
-	}, []);
+	}, [URL]);
 
 	if (!data) return <div className="loader">Loading...</div>;
 
